@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 
-export default function about() {
+export default function Point() {
   return (
     <View
       style={{
@@ -9,7 +9,7 @@ export default function about() {
         alignItems: "center",
       }}
     >
-      <Text>about</Text>
+      <Text>Point</Text>
     </View>
     
   );
