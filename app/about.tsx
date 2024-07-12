@@ -1,7 +1,6 @@
 import { Text, View } from "react-native";
-import { Link } from 'expo-router';
 
-export default function Home() {
+export default function about() {
   return (
     <View
       style={{
@@ -10,8 +9,7 @@ export default function Home() {
         alignItems: "center",
       }}
     >
-      <Text>home</Text>
-      <Link href="/about">Go to about</Link>
+      <Text>about</Text>
     </View>
     
   );
