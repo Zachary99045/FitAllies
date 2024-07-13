@@ -9,7 +9,7 @@ export default function Meet() {
         alignItems: "center",
       }}
     >
-      <Text>home</Text>
+      <Text>meet</Text>
     </View>
     
   );
