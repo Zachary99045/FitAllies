@@ -3,10 +3,13 @@ import { FontAwesome6 } from '@expo/vector-icons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Ionicons } from '@expo/vector-icons';
 import {Tabs} from "expo-router";
+import { LinearGradient } from 'expo-linear-gradient';
+
+
 
 export default () =>{
     return(
-        <Tabs screenOptions={{ tabBarActiveTintColor: '#87AECF' }}>
+        <Tabs screenOptions={{ tabBarInactiveTintColor: '#87AECF', tabBarActiveTintColor: '#FFCACA' }}>
             <Tabs.Screen
                 name="home" 
                 options = {{
