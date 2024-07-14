@@ -1,4 +1,5 @@
 import { Text, View } from "react-native";
+import Heart from '@/src/icons/heart';
 
 export default function chat() {
   return (
@@ -9,6 +10,7 @@ export default function chat() {
         alignItems: "center",
       }}
     >
+      <Heart />
       <Text>chat</Text>
     </View>
     
