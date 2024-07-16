@@ -1,70 +1,77 @@
-import { Pressable, Text, View, StyleSheet} from "react-native";
-import { Link, router } from "expo-router";
+import { SafeAreaView, Pressable, Text, View, StyleSheet, ScrollView} from "react-native";
+import { router } from "expo-router";
 import { Entypo } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons} from '@expo/vector-icons';
+
 
 export default function home() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
       <Text style={styles.upcomingEvent}>Upcoming Event</Text>
       <View style={styles.events}>
 
-        <Pressable 
-          onPress={() => router.push("/home/eventdetail")}
-          style={({ pressed }) => [
-            {
-              backgroundColor: pressed ? '#E6F4FF' : '#E6F4FF',
-              opacity: pressed ? 0.6 : 1,
-            },
-          styles.firstSingleEvent
-          ]}
-        > 
-          <View style={styles.eventIconCircle}>
-            <MaterialCommunityIcons name="badminton" size={24} color="#395873" />
-          </View>
-          <View style={styles.textContainer}>
-            <Text style={styles.eventText}>Badminton</Text>
-            <Text style={styles.eventSubText}>TODAY   12 am - 2 pm</Text>
-          </View>
-          <Entypo name="dots-three-horizontal" size={20} color="black" style={styles.dot} />
-        </Pressable>
+      <EventPressable 
+            eventType="Badminton"
+            eventTime="TODAY 12 am - 2 pm"
+            icon={<MaterialCommunityIcons name="badminton" size={24} color="#395873" />}
+            onPress={() => router.push("/home/eventdetail")}
+          />
 
-        <Pressable 
-          onPress={() => router.push("/home/eventdetail")}
-          style={({ pressed }) => [
-            {
-              backgroundColor: pressed ? '#E6F4FF' : '#E6F4FF',
-              opacity: pressed ? 0.6 : 1,
-            },
-          styles.otherSingleEvent
-          ]}
-        > 
-          <View style={styles.eventIconCircle}>
-            <MaterialCommunityIcons name="yoga" size={24} color="#395873" />
-          </View>
-          <View style={styles.textContainer}>
-            <Text style={styles.eventText}>Yoga</Text>
-            <Text style={styles.eventSubText}>6/23   4 pm - 5 pm</Text>
-          </View>
-          <Entypo name="dots-three-horizontal" size={20} color="black" style={styles.dot} />
-        </Pressable>
+          <EventPressable 
+            eventType="Yoga"
+            eventTime="6/23 4 pm - 5 pm"
+            icon={<MaterialCommunityIcons name="yoga" size={24} color="#395873" />}
+            onPress={() => router.push("/home/eventdetail")}
+          />
+        
       </View>
-    </View>
-    
-
+      </ScrollView>
+    </SafeAreaView>
   );
 }
+
+const EventPressable = ({ eventType, eventTime, icon, onPress }: EventPressableProps) => (
+  <Pressable 
+    onPress={onPress}
+    style={({ pressed }) => [
+      {
+        backgroundColor: pressed ? '#E6F4FF' : '#E6F4FF',
+        opacity: pressed ? 0.6 : 1,
+      },
+      styles.otherSingleEvent
+    ]}
+  >
+    <View style={styles.eventIconCircle}>
+      {icon}
+    </View>
+    <View style={styles.textContainer}>
+      <Text style={styles.eventText}>{eventType}</Text>
+      <Text style={styles.eventSubText}>{eventTime}</Text>
+    </View>
+    <Entypo name="dots-three-horizontal" size={20} color="black" style={styles.dot} />
+  </Pressable>
+);
+
+interface EventPressableProps {
+  eventType: string;
+  eventTime: string;
+  icon: React.ReactNode;
+  onPress: () => void;
+}
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex: 1,
+    paddingBottom: 85
+  },
+  scrollContainer:{
     alignItems: 'center',
-    justifyContent:"center"
+    paddingVertical:20,
   },
   upcomingEvent: {
-    position:'absolute',
-    top:20,
-    left: 40,
+    margin:20,
     color: '#395873',
     fontSize: 20,
     fontWeight: 'bold',
@@ -73,12 +80,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent:'center',
     alignItems: 'center',
-    position:'absolute',
-    top:65,
+    alignSelf:'center',
     backgroundColor:"transparent",
     borderWidth:3,
     borderColor:"#395873",
-    width:340,
+    paddingHorizontal:20,
     paddingVertical:20,
     borderRadius:30
   },
