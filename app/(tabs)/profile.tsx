@@ -1,16 +1,20 @@
-import { Text, View } from "react-native";
+import { SafeAreaView, Pressable, Text, View, StyleSheet, ScrollView} from "react-native";
 
-export default function Profile() {
+export default function profile() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Profile</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <Text>profile</Text>
+      </ScrollView>
+    </SafeAreaView>
     
   );
 }
+
+const styles = StyleSheet.create({
+  container:{
+    backgroundColor: 'white',
+    flex: 1,
+    paddingBottom: 85
+  },
+})

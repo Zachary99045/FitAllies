@@ -1,18 +1,22 @@
-import { Text, View } from "react-native";
+import { SafeAreaView, Pressable, Text, View, StyleSheet, ScrollView} from "react-native";
 import Heart from '@/src/icons/heart';
 
 export default function chat() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Heart />
-      <Text>chat</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <Heart />
+        <Text>chat</Text>
+      </ScrollView>
+    </SafeAreaView>
     
   );
 }
+
+const styles = StyleSheet.create({
+  container:{
+    backgroundColor: 'white',
+    flex: 1,
+    paddingBottom: 85
+  },
+})

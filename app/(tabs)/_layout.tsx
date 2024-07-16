@@ -1,9 +1,7 @@
 import React from 'react';
-import { FontAwesome6 } from '@expo/vector-icons';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Ionicons } from '@expo/vector-icons';
-import {Tabs} from "expo-router";
-import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+import { Pressable, Text, StyleSheet, ViewStyle} from "react-native";
+import { FontAwesome6, Ionicons, AntDesign, FontAwesome } from '@expo/vector-icons';
+import {Tabs, router} from "expo-router";
 import Heart from '@/src/icons/heart';
 
 const TabBarStyle: ViewStyle = {
@@ -42,7 +40,20 @@ export default () =>{
                     title: 'chat', 
                     tabBarIcon: ({ color }) => <Ionicons size={35} name="chatbox-ellipses" color={color} />,
                     tabBarStyle: TabBarStyle,
-                    headerShown: false
+                    headerTitle: "Chat",
+                    headerTintColor: "#395873",
+                    headerTitleStyle: { fontSize: 25, fontWeight: 'bold' },
+                    headerRight: () => (
+                        <Pressable
+                        onPress={() => router.push("/home/eventdetail")}
+                        style={styles.button}
+                        >
+                            <FontAwesome6 size={14} name="coins" color="#395873" style={styles.point}/>
+                            <Text style={styles.buttonText}>1000</Text>
+                            <AntDesign name="plus" size={14} color="black" style={styles.plus} />
+              
+                        </Pressable>
+                    ),
                 }}
             />
             <Tabs.Screen
@@ -51,7 +62,20 @@ export default () =>{
                     title: 'meet', 
                     tabBarIcon: ({ color }) => <Heart/>,
                     tabBarStyle: TabBarStyle,
-                    headerShown: false
+                    headerTitle: "Meet",
+                    headerTintColor: "#395873",
+                    headerTitleStyle: { fontSize: 25, fontWeight: 'bold' },
+                    headerRight: () => (
+                        <Pressable
+                        onPress={() => router.push("/home/eventdetail")}
+                        style={styles.button}
+                        >
+                            <FontAwesome6 size={14} name="coins" color="#395873" style={styles.point}/>
+                            <Text style={styles.buttonText}>1000</Text>
+                            <AntDesign name="plus" size={14} color="black" style={styles.plus} />
+              
+                        </Pressable>
+                    ),
                 }}
             />
             <Tabs.Screen
@@ -60,7 +84,20 @@ export default () =>{
                     title: 'point', 
                     tabBarIcon: ({ color }) => <FontAwesome6 size={31} name="coins" color={color} />,
                     tabBarStyle: TabBarStyle,
-                    headerShown: false
+                    headerTitle: "Point",
+                    headerTintColor: "#395873",
+                    headerTitleStyle: { fontSize: 25, fontWeight: 'bold' },
+                    headerRight: () => (
+                        <Pressable
+                        onPress={() => router.push("/home/eventdetail")}
+                        style={styles.button}
+                        >
+                            <FontAwesome6 size={14} name="coins" color="#395873" style={styles.point}/>
+                            <Text style={styles.buttonText}>1000</Text>
+                            <AntDesign name="plus" size={14} color="black" style={styles.plus} />
+              
+                        </Pressable>
+                    ),
                 }}
             />
             <Tabs.Screen
@@ -69,9 +106,48 @@ export default () =>{
                     title: 'profile', 
                     tabBarIcon: ({ color }) => <FontAwesome size={31} name="user" color={color} />,
                     tabBarStyle: TabBarStyle,
-                    headerShown: false
+                    headerTitle: "Profile",
+                    headerTintColor: "#395873",
+                    headerTitleStyle: { fontSize: 25, fontWeight: 'bold' },
+                    headerRight: () => (
+                        <Pressable
+                        onPress={() => router.push("/home/eventdetail")}
+                        style={styles.button}
+                        >
+                            <FontAwesome6 size={14} name="coins" color="#395873" style={styles.point}/>
+                            <Text style={styles.buttonText}>1000</Text>
+                            <AntDesign name="plus" size={14} color="black" style={styles.plus} />
+              
+                        </Pressable>
+                    ),
                 }}
             />
         </Tabs>
     ); 
 };
+
+const styles = StyleSheet.create({
+    button: {
+      flexDirection: 'row',
+      alignItems:'center',
+      backgroundColor: 'transparent',
+      paddingVertical: 4,
+      paddingHorizontal: 10,
+      borderWidth: 1,
+      borderRadius: 30,
+      borderColor: '#395873',
+      marginRight: 10, // Add margin to separate it from the edge
+    },
+    buttonText: {
+      color: '#395873',
+      fontSize: 13,
+      fontWeight: 'normal',
+      marginHorizontal:5
+    },
+    plus: {
+      marginLeft: 5,
+    },
+    point: {
+      marginRight: 5,
+    },
+  });
