@@ -1,7 +1,6 @@
 import { SafeAreaView, Pressable, Text, View, StyleSheet, ScrollView} from "react-native";
 import { router } from "expo-router";
-import { Entypo } from '@expo/vector-icons';
-import { MaterialCommunityIcons} from '@expo/vector-icons';
+import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 export default function home() {
@@ -11,7 +10,7 @@ export default function home() {
       <Text style={styles.upcomingEvent}>Upcoming Event</Text>
       <View style={styles.events}>
 
-      <EventPressable 
+      <FirstEventPressable 
             eventType="Badminton"
             eventTime="TODAY 12 am - 2 pm"
             icon={<MaterialCommunityIcons name="badminton" size={24} color="#395873" />}
@@ -31,6 +30,28 @@ export default function home() {
   );
 }
 
+const FirstEventPressable = ({ eventType, eventTime, icon, onPress }: EventPressableProps) => (
+  <Pressable 
+    onPress={onPress}
+    style={({ pressed }) => [
+      {
+        backgroundColor: pressed ? '#E6F4FF' : '#E6F4FF',
+        opacity: pressed ? 0.6 : 1,
+      },
+      styles.firstSingleEvent
+    ]}
+  >
+    <View style={styles.eventIconCircle}>
+      {icon}
+    </View>
+    <View style={styles.textContainer}>
+      <Text style={styles.eventText}>{eventType}</Text>
+      <Text style={styles.eventSubText}>{eventTime}</Text>
+    </View>
+    <Entypo name="dots-three-horizontal" size={20} color="black" style={styles.dot} />
+  </Pressable>
+);
+
 const EventPressable = ({ eventType, eventTime, icon, onPress }: EventPressableProps) => (
   <Pressable 
     onPress={onPress}
@@ -39,7 +60,7 @@ const EventPressable = ({ eventType, eventTime, icon, onPress }: EventPressableP
         backgroundColor: pressed ? '#E6F4FF' : '#E6F4FF',
         opacity: pressed ? 0.6 : 1,
       },
-      styles.otherSingleEvent
+      styles.otherSingleEvent,
     ]}
   >
     <View style={styles.eventIconCircle}>
@@ -64,16 +85,15 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex: 1,
-    paddingBottom: 85
-  },
-  scrollContainer:{
-    alignItems: 'center',
-    paddingVertical:20,
+    paddingBottom: 85,
+    paddingTop:20,
+    paddingHorizontal:20
   },
   upcomingEvent: {
-    margin:20,
+    marginLeft:20,
+    marginBottom:15,
     color: '#395873',
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
   },
   events:{
@@ -84,17 +104,17 @@ const styles = StyleSheet.create({
     backgroundColor:"transparent",
     borderWidth:3,
     borderColor:"#395873",
-    paddingHorizontal:20,
-    paddingVertical:20,
-    borderRadius:30
+    width:"100%",
+    paddingVertical:15,
+    borderRadius:30,
   },
   firstSingleEvent:{
     flexDirection: 'row',
     justifyContent:'center',
     alignItems: 'center',
-    width:300,
+    width:"87%",
     height:60,
-    borderWidth:3,
+    borderWidth:2.5,
     borderColor:"#395873",
     borderRadius:30,
   },
@@ -102,9 +122,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent:'center',
     alignItems: 'center',
-    width:300,
+    width:"87%",
     height:60,
-    borderWidth:3,
+    borderWidth:2.5,
     borderColor:"#395873",
     borderRadius:30,
     marginTop:10
@@ -138,5 +158,5 @@ const styles = StyleSheet.create({
   },
   dot:{
     marginRight:15,
-  }
+  },
 });

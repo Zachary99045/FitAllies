@@ -1,7 +1,6 @@
 import { router, Stack } from "expo-router";
 import { Pressable, Text, StyleSheet,} from "react-native";
-import { FontAwesome6 } from '@expo/vector-icons';
-import AntDesign from '@expo/vector-icons/AntDesign';
+import { FontAwesome6, AntDesign } from '@expo/vector-icons';
 
 export default () =>{
   return (

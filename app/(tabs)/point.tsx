@@ -1,16 +1,19 @@
-import { Text, View } from "react-native";
+import { SafeAreaView, Pressable, Text, View, StyleSheet, ScrollView} from "react-native";
 
-export default function Point() {
+export default function point() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Point</Text>
-    </View>
-    
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <Text>point</Text>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container:{
+    backgroundColor: 'white',
+    flex: 1,
+    paddingBottom: 85
+  },
+})
