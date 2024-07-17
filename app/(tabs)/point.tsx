@@ -4,7 +4,7 @@ export default function point() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <Text>point</Text>
+        <Text style={styles.subHeader}>Your Coupon</Text>
       </ScrollView>
     </SafeAreaView>
   );
@@ -14,6 +14,15 @@ const styles = StyleSheet.create({
   container:{
     backgroundColor: 'white',
     flex: 1,
-    paddingBottom: 85
+    paddingBottom: 85,
+    paddingHorizontal:20
+  },
+  subHeader: {
+    marginTop:20,
+    marginLeft:20,
+    marginBottom:15,
+    color: '#395873',
+    fontSize: 22,
+    fontWeight: 'bold',
   },
 })

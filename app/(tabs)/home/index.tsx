@@ -7,24 +7,41 @@ export default function home() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-      <Text style={styles.upcomingEvent}>Upcoming Event</Text>
+      <Text style={styles.subHeader}>Upcoming Event</Text>
       <View style={styles.events}>
 
-      <FirstEventPressable 
-            eventType="Badminton"
-            eventTime="TODAY 12 am - 2 pm"
-            icon={<MaterialCommunityIcons name="badminton" size={24} color="#395873" />}
-            onPress={() => router.push("/home/eventdetail")}
-          />
+        <FirstEventPressable 
+          eventType="Badminton"
+          eventTime="TODAY 12 am - 2 pm"
+          icon={<MaterialCommunityIcons name="badminton" size={24} color="#395873" />}
+          onPress={() => router.push("/home/eventdetail")}
+        />
 
-          <EventPressable 
-            eventType="Yoga"
-            eventTime="6/23 4 pm - 5 pm"
-            icon={<MaterialCommunityIcons name="yoga" size={24} color="#395873" />}
-            onPress={() => router.push("/home/eventdetail")}
-          />
-        
+        <EventPressable 
+          eventType="Yoga"
+          eventTime="6/23 4 pm - 5 pm"
+          icon={<MaterialCommunityIcons name="yoga" size={24} color="#395873" />}
+          onPress={() => router.push("/home/eventdetail")}
+        />
+                  
       </View>
+      <Text style={styles.subHeader}>July 2024</Text>
+      <View style={styles.events}>
+
+      </View>
+      <Pressable 
+        onPress={() => router.push("/createEvent")}
+        style={({ pressed }) => [
+          {
+            backgroundColor: pressed ? '#E6F4FF' : '#E6F4FF',
+            opacity: pressed ? 0.6 : 1,
+          },
+          styles.otherSingleEvent,
+        ]}
+      >
+        <Text style={styles.eventText}>Creat Event</Text>
+      </Pressable>
+      
       </ScrollView>
     </SafeAreaView>
   );
@@ -86,10 +103,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
     paddingBottom: 85,
-    paddingTop:20,
     paddingHorizontal:20
   },
-  upcomingEvent: {
+  subHeader: {
+    marginTop:20,
     marginLeft:20,
     marginBottom:15,
     color: '#395873',
@@ -104,7 +121,7 @@ const styles = StyleSheet.create({
     backgroundColor:"transparent",
     borderWidth:3,
     borderColor:"#395873",
-    width:"100%",
+    width:"95%",
     paddingVertical:15,
     borderRadius:30,
   },
@@ -112,22 +129,32 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent:'center',
     alignItems: 'center',
-    width:"87%",
+    width:"90%",
     height:60,
     borderWidth:2.5,
     borderColor:"#395873",
     borderRadius:30,
+    shadowColor: "#000",
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   otherSingleEvent:{
     flexDirection: 'row',
     justifyContent:'center',
     alignItems: 'center',
-    width:"87%",
+    width:"90%",
     height:60,
     borderWidth:2.5,
     borderColor:"#395873",
     borderRadius:30,
-    marginTop:10
+    marginTop:10,
+    shadowColor: "#000",
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   textContainer: {
     flex: 1,
