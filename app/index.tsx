@@ -1,28 +1,26 @@
-import {Redirect} from 'expo-router';
-import { View, StyleSheet, Image } from 'react-native';
+
+import {useEffect} from 'react';
+import {supabase} from '@/lib/supabaseClient'
+import {router} from "expo-router";
 
 const StartPage = () => {
-  return(
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if(session) {
+        router.replace("/home");
+      } else {
+        console.log("no user")
+      }
+    })
 
-    <View style={styles.container}>
-      <Image source={require('@/assets/images/logo1.png')} style={styles.icon} />
-      <Redirect href="/home" />
-    </View>
-    
-  )
+    supabase.auth.onAuthStateChange((_event, session) => {
+      if(session) {
+        router.replace("/home");
+      }else{
+        console.log("no user");
+        router.replace("/login");
+      }
+    })
+  }, [])
 };
 export default StartPage;
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#FFFFFF',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center', 
-  },
-  icon: {
-      width: 200, 
-      height: 200, 
-      marginBottom: 150, 
-    },
-})

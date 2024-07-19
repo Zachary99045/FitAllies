@@ -68,7 +68,7 @@ export default () =>{
                     title: 'profile', 
                     tabBarIcon: ({ color }) => <FontAwesome size={31} name="user" color={color} />,
                     tabBarStyle: TabBarStyle,
-                    header: () => <CustomHeader title="Profile" />,
+                    headerShown: false
                 }}
             />
         </Tabs>

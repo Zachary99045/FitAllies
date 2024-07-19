@@ -14,7 +14,7 @@ AppState.addEventListener('change', (state) => {
   }
 })
 
-export default function Auth() {
+export default function signin() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -26,7 +26,7 @@ export default function Auth() {
       password: password,
     })
 
-    if (error) Alert.alert(error.message)
+    if (error) Alert.alert("Sign In Error", error.message)
     setLoading(false)
   }
 
@@ -44,7 +44,7 @@ export default function Auth() {
       />
       
       <TextInput
-        style = {[styles.textInput,{marginBottom:300}]}
+        style = {[styles.textInput,{marginBottom:350}]}
         onChangeText={(text) => setPassword(text)}
         value={password}
         secureTextEntry={true}
