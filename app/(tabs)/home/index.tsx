@@ -36,7 +36,7 @@ export default function home() {
             backgroundColor: pressed ? '#E6F4FF' : '#E6F4FF',
             opacity: pressed ? 0.6 : 1,
           },
-          styles.otherSingleEvent,
+          styles.createEvent
         ]}
       >
         <Text style={styles.eventText}>Creat Event</Text>
@@ -186,4 +186,21 @@ const styles = StyleSheet.create({
   dot:{
     marginRight:15,
   },
+  createEvent:{
+    alignSelf:"center",
+    flexDirection: 'row',
+    justifyContent:'center',
+    alignItems: 'center',
+    width:"85%",
+    height:60,
+    borderWidth:2.5,
+    borderColor:"#395873",
+    borderRadius:30,
+    marginTop:20,
+    shadowColor: "#000",
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  }
 });

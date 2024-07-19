@@ -1,5 +1,6 @@
 import { SafeAreaView, Pressable, Text, View, StyleSheet, ScrollView} from "react-native";
 import Heart from '@/src/icons/heart';
+import { router } from "expo-router";
 
 export default function chat() {
   return (
@@ -7,6 +8,17 @@ export default function chat() {
       <ScrollView>
         <Heart />
         <Text>chat</Text>
+        <Pressable 
+        onPress={() => router.push("/createEvent")}
+        style={({ pressed }) => [
+          {
+            backgroundColor: pressed ? '#E6F4FF' : '#E6F4FF',
+            opacity: pressed ? 0.6 : 1,
+          },
+        ]}
+      >
+        <Text>Creat Event</Text>
+      </Pressable>
       </ScrollView>
     </SafeAreaView>
     

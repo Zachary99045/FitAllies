@@ -1,5 +1,6 @@
 import { Stack } from "expo-router";
 import CustomHeader from "@/components/CustomHeader";
+import CustomHeaderBack from "@/components/CustomHeaderBack";
 
 export default () => {
   return (
@@ -10,7 +11,11 @@ export default () => {
           header: () => <CustomHeader title="Home" />,
         }}
       />
-      <Stack.Screen name="eventdetail" options={{ headerShown: false }} />
+      <Stack.Screen 
+        name="eventdetail" 
+        options={{
+        header: () => <CustomHeaderBack title="Event Detail" />,
+        }}/>
     </Stack>
   );
 };
