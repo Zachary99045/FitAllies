@@ -30,6 +30,7 @@ export default function signup() {
     })
 
     if (error) Alert.alert("Sign Up Error",error.message)
+    if (!session) Alert.alert('Please check your inbox for email verification!')
     setLoading(false)
   }
 
