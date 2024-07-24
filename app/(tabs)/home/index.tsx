@@ -1,6 +1,6 @@
 import { SafeAreaView, Pressable, Text, View, StyleSheet, ScrollView} from "react-native";
 import { router } from "expo-router";
-import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Entypo, MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 
 
 export default function home() {
@@ -28,7 +28,8 @@ export default function home() {
       <Text style={styles.subHeader}>July 2024</Text>
       <View style={styles.events}>
 
-      </View>
+      </View>      
+      </ScrollView>
       <Pressable 
         onPress={() => router.push("/createEvent")}
         style={({ pressed }) => [
@@ -39,10 +40,8 @@ export default function home() {
           styles.createEvent
         ]}
       >
-        <Text style={styles.eventText}>Creat Event</Text>
+        <AntDesign name="plus" size={26} color="black"/>
       </Pressable>
-      
-      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -103,7 +102,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
     paddingBottom: 85,
-    paddingHorizontal:20
+    paddingHorizontal:10
   },
   subHeader: {
     marginTop:20,
@@ -187,16 +186,16 @@ const styles = StyleSheet.create({
     marginRight:15,
   },
   createEvent:{
-    alignSelf:"center",
-    flexDirection: 'row',
+    position:'absolute',
+    bottom:100,
+    right:20,
     justifyContent:'center',
     alignItems: 'center',
-    width:"85%",
+    width:60,
     height:60,
     borderWidth:2.5,
     borderColor:"#395873",
     borderRadius:30,
-    marginTop:20,
     shadowColor: "#000",
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.25,
