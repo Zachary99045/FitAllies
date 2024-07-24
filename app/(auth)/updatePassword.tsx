@@ -1,40 +1,32 @@
 import React, { useState } from 'react'
-import { Text, Alert, StyleSheet, View, AppState , Button, TextInput, Pressable} from 'react-native'
+import { Text, Alert, StyleSheet, View, TextInput, Pressable} from 'react-native'
 import { router} from "expo-router";
 import { supabase } from '@/lib/supabaseClient'
 
-// Tells Supabase Auth to continuously refresh the session automatically if
-// the app is in the foreground. When this is added, you will continue to receive
-// `onAuthStateChange` events with the `TOKEN_REFRESHED` or `SIGNED_OUT` event
-// if the user's session is terminated. This should only be registered once.
-AppState.addEventListener('change', (state) => {
-  if (state === 'active') {
-    supabase.auth.startAutoRefresh()
-  } else {
-    supabase.auth.stopAutoRefresh()
-  }
-})
-
-export default function signin() {
+export default function updatePassword() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
 
-  async function signInWithEmail() {
+  async function resetPassword() {
     setLoading(true)
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
+    const { error } = await supabase.auth.updateUser({
+        email: email,
+        password: password,
     })
 
-    if (error) Alert.alert("Sign In Error", error.message)
+    if (error){
+        Alert.alert("Unvalid Email or Password", error.message);
+    } else {
+        Alert.alert('Success','Password recovery email sent!');
+    }
     setLoading(false)
   }
 
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
-        Welcome back
+       Reset Password
       </Text>
       <TextInput
         style = {styles.textInput}
@@ -52,11 +44,8 @@ export default function signin() {
         placeholder="Password"
         autoCapitalize={'none'}
       />
-      <Pressable style ={styles.forgotpass} disabled={loading} onPress={() => router.push("/passwordrecovery")}>
-        <Text>Forgot Password?</Text>
-      </Pressable>
-      <Pressable style ={styles.Pressable} disabled={loading} onPress={() => signInWithEmail()}>
-        <Text>Sign in</Text>
+      <Pressable style ={styles.Pressable} disabled={loading} onPress={() => resetPassword()}>
+        <Text>Reset Password</Text>
       </Pressable>
       
     </View>

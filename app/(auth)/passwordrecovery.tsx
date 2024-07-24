@@ -1,40 +1,32 @@
 import React, { useState } from 'react'
-import { Text, Alert, StyleSheet, View, AppState , Button, TextInput, Pressable} from 'react-native'
-import { router} from "expo-router";
+import { Text, Alert, StyleSheet, View, AppState , TextInput, Pressable} from 'react-native'
 import { supabase } from '@/lib/supabaseClient'
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
 // `onAuthStateChange` events with the `TOKEN_REFRESHED` or `SIGNED_OUT` event
 // if the user's session is terminated. This should only be registered once.
-AppState.addEventListener('change', (state) => {
-  if (state === 'active') {
-    supabase.auth.startAutoRefresh()
-  } else {
-    supabase.auth.stopAutoRefresh()
-  }
-})
 
-export default function signin() {
+export default function passwordrecovery () {
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
 
-  async function signInWithEmail() {
+  async function handlePasswordRecovery() {
     setLoading(true)
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    })
+    let { data, error } = await supabase.auth.resetPasswordForEmail(email)
 
-    if (error) Alert.alert("Sign In Error", error.message)
+    if (error){
+        Alert.alert("Unvalid Email", error.message);
+    } else {
+        Alert.alert('Success','Password recovery email sent!');
+    }
     setLoading(false)
   }
 
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
-        Welcome back
+        Forgot Password
       </Text>
       <TextInput
         style = {styles.textInput}
@@ -44,21 +36,9 @@ export default function signin() {
         autoCapitalize={'none'}
       />
       
-      <TextInput
-        style = {[styles.textInput,{marginBottom:350}]}
-        onChangeText={(text) => setPassword(text)}
-        value={password}
-        secureTextEntry={true}
-        placeholder="Password"
-        autoCapitalize={'none'}
-      />
-      <Pressable style ={styles.forgotpass} disabled={loading} onPress={() => router.push("/passwordrecovery")}>
-        <Text>Forgot Password?</Text>
+      <Pressable style ={styles.Pressable} disabled={loading} onPress={() => handlePasswordRecovery()}>
+        <Text>Continue</Text>
       </Pressable>
-      <Pressable style ={styles.Pressable} disabled={loading} onPress={() => signInWithEmail()}>
-        <Text>Sign in</Text>
-      </Pressable>
-      
     </View>
   )
 }
@@ -75,9 +55,6 @@ const styles = StyleSheet.create({
     color: "black",
     fontWeight: "bold",
     marginBottom: 30,
-  },
-  forgotpass: {
-
   },
   Pressable: {
     width: '80%',
