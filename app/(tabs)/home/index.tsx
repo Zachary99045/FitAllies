@@ -12,14 +12,14 @@ export default function home() {
 
         <FirstEventPressable 
           eventType="Badminton"
-          eventTime="TODAY 12 am - 2 pm"
+          eventTime="TODAY 12:30 PM - 02:00 PM"
           icon={<MaterialCommunityIcons name="badminton" size={24} color="#395873" />}
           onPress={() => router.push("/home/eventdetail")}
         />
 
         <EventPressable 
           eventType="Yoga"
-          eventTime="6/23 4 pm - 5 pm"
+          eventTime="6/23 04:00 PM - 05:00 PM"
           icon={<MaterialCommunityIcons name="yoga" size={24} color="#395873" />}
           onPress={() => router.push("/home/eventdetail")}
         />
@@ -40,7 +40,8 @@ export default function home() {
           styles.createEvent
         ]}
       >
-        <AntDesign name="plus" size={26} color="black"/>
+        <Text style={styles.createEventText}>Create Event </Text>
+        <AntDesign name="plus" size={15} color="black"/>
       </Pressable>
     </SafeAreaView>
   );
@@ -189,10 +190,10 @@ const styles = StyleSheet.create({
     position:'absolute',
     bottom:100,
     right:20,
+    flexDirection:"row",
     justifyContent:'center',
     alignItems: 'center',
-    width:60,
-    height:60,
+    padding:10,
     borderWidth:2.5,
     borderColor:"#395873",
     borderRadius:30,
@@ -201,5 +202,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  createEventText:{
+    fontSize:15,
+    color: '#395873',
+    fontWeight:'500'
   }
 });
