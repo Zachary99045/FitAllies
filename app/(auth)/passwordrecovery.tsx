@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Text, Alert, StyleSheet, View, AppState , TextInput, Pressable} from 'react-native'
+import { Text, Alert, StyleSheet, View, TextInput, Pressable} from 'react-native'
 import { supabase } from '@/lib/supabaseClient'
 
 // Tells Supabase Auth to continuously refresh the session automatically if

@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { Text, Alert, StyleSheet, View, TextInput, Pressable} from 'react-native'
-import { router} from "expo-router";
+import * as Linking from 'expo-linking';
 import { supabase } from '@/lib/supabaseClient'
 
 export default function updatePassword() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
-
+  const redirectUrl = Linking.createURL('auth/updatePassword', {
+    queryParams: { password: 'update' },
+  });
   async function resetPassword() {
     setLoading(true)
     const { error } = await supabase.auth.updateUser({
@@ -35,7 +37,7 @@ export default function updatePassword() {
         placeholder="email@address.com"
         autoCapitalize={'none'}
       />
-      
+
       <TextInput
         style = {[styles.textInput,{marginBottom:350}]}
         onChangeText={(text) => setPassword(text)}

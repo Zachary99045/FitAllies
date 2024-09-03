@@ -1,7 +1,9 @@
-
+import * as Linking from 'expo-linking';
 import {useEffect} from 'react';
 import {supabase} from '@/lib/supabaseClient'
 import {router} from "expo-router";
+
+
 
 const StartPage = () => {
   useEffect(() => {
