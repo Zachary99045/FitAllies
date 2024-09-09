@@ -13,6 +13,8 @@ export default function profile() {
   const [loading, setLoading] = useState(false)
   const [session, setSession] = useState<Session | null>(null);
 
+
+  //getting the User login Data
   useEffect(() => {
     const fetchSession = async () => {
       const { data: sessionData } = await supabase.auth.getSession();
@@ -29,18 +31,15 @@ export default function profile() {
   async function getProfile() {
     try {
       setLoading(true)
-      if (!session?.user) throw new Error('No user on the session!')
       
-      console.log('Fetched Profile Data:', session.user.identities);
+      if (!session?.user) throw new Error('No user on the session!')
+
       const { data, error, status } = await supabase
         .from('profiles')
         .select()
         .eq('id', session?.user.id)
         .single();
 
-      console.log('Fetched Profile Data:', data);
-      console.log('Supabase Error:', error);
-      console.log('Supabase Status:', status);
       if (error && status !== 406) {
         throw error
       }
@@ -77,7 +76,6 @@ export default function profile() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <Text style={styles.subHeader}>Profile</Text>
         <Text>{firstName}</Text>
         <Text>{middleName}</Text>
         <Text>{lastName}</Text>

@@ -1,143 +1,24 @@
 import * as React from 'react'
 import { useState, useEffect} from 'react'
-import { TextInput, View, Alert, StyleSheet, AppState} from 'react-native'
+import { Text, TextInput, View, Alert, StyleSheet, AppState, Pressable} from 'react-native'
 import { supabase } from '@/lib/supabaseClient'
 import { Session } from '@supabase/supabase-js'
+import { router} from "expo-router";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-// Tells Supabase Auth to continuously refresh the session automatically if
-// the app is in the foreground. When this is added, you will continue to receive
-// `onAuthStateChange` events with the `TOKEN_REFRESHED` or `SIGNED_OUT` event
-// if the user's session is terminated. This should only be registered once.
-AppState.addEventListener('change', (state) => {
-  if (state === 'active') {
-    supabase.auth.startAutoRefresh()
-  } else {
-    supabase.auth.stopAutoRefresh()
-  }
-})
 
-
-
-export default function fillOutBasicInfo({ session }: { session: Session }) {
-    const [firstName, setFirstName] = useState(true)
-    const [middleName, setMiddleName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [dateOfBirth, setdateOfBirth] = useState(new Date)
-    const [gender, setdGender] = useState('')
-    const [intro, setIntro] = useState('')
-    const [formError, setFormError] = useState('')
-    const [showPicker, setShowPicker] = useState(false);
-    const [loading, setLoading] = useState(false)
-
-    useEffect(() => {
-      if (session) getProfile()
-    }, [session])
-
-    async function getProfile() {
-      try {
-        setLoading(true)
-        if (!session?.user) throw new Error('No user on the session!')
-  
-        const { data, error, status } = await supabase
-          .from('profiles')
-          .select(`firstName, middleName, lastName, dateOfBirth, gender, intro`)
-          .eq('id', session?.user.id)
-          .single()
-        if (error && status !== 406) {
-          throw error
-        }
-  
-        if (data) {
-          setFirstName(data.firstName)
-          setMiddleName(data.middleName)
-          setLastName(data.lastName)
-          setdateOfBirth(data.dateOfBirth)
-          setdGender(data.gender)
-          setIntro(data.intro)
-        }
-      } catch (error) {
-        if (error instanceof Error) {
-          Alert.alert(error.message)
-        }
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    async function updateProfile({
-      firstName,
-      middleName,
-      lastName,
-      dateOfBirth,
-      gender,
-      intro,
-
-    }: {
-      firstName: string
-      middleName: string
-      lastName: string
-      dateOfBirth: Date
-      gender: string
-      intro: string
-    }) {
-      try {
-        setLoading(true)
-        if (!session?.user) throw new Error('No user on the session!')
-  
-        const updates = {
-          id: session?.user.id,
-          firstName,
-          middleName,
-          lastName,
-          dateOfBirth,
-          gender,
-          intro,
-        }
-  
-        const { error } = await supabase.from('profiles').upsert(updates)
-  
-        if (error) {
-          throw error
-        }
-      } catch (error) {
-        if (error instanceof Error) {
-          Alert.alert(error.message)
-        }
-      } finally {
-        setLoading(false)
-      }
-    }
+export default function fillOutBasicInfo() {
+   
   
 
   return (
     <View style={styles.container}>
-      <View>
-        <TextInput value={firstName || ''} disabled />
-      </View>
-      <View >
-        <TextInput value={username || ''} onChangeText={(text) => setUsername(text)} />
-      </View>
-      <View >
-        <TextInput value={website || ''} onChangeText={(text) => setWebsite(text)} />
-      </View>
-      <View >
-        <TextInput value={website || ''} onChangeText={(text) => setWebsite(text)} />
-      </View>
-      <View >
-        <TextInput value={website || ''} onChangeText={(text) => setWebsite(text)} />
-      </View>
-      <View >
-        <TextInput value={website || ''} onChangeText={(text) => setWebsite(text)} />
-      </View>
-
-      <View >
-        <Button
-          title={loading ? 'Loading ...' : 'Update'}
-          onPress={() => updateProfile({ username, website, avatar_url: avatarUrl })}
-          disabled={loading}
-        />
-      </View>
+      <Text style={styles.text}>
+        Welcome back
+      </Text>
+      <Pressable onPress={() => router.push("/home")}>
+        <Text>Forgot Password?</Text>
+      </Pressable>
     </View>
   )
 }
